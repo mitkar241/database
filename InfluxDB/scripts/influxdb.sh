@@ -4,3 +4,5 @@ echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stabl
 sudo apt install influxdb -y
 sudo systemctl start influxdb
 sudo systemctl enable influxdb
+# need to install client for `influx` CLI
+sudo apt install influxdb-client -y
