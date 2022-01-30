@@ -49,7 +49,7 @@ def get_mc(ip="localhost", port=27017):
 # Database
 ##########
 
-def get_db(mc, db_name):
+def create_db(mc, db_name):
   db = mc[db_name]
   return db
 
@@ -70,7 +70,7 @@ def drop_db(mc, db_name):
 # Collection
 ##########
 
-def get_col(db, col_name):
+def create_col(db, col_name):
   col = db[col_name]
   return col
 
@@ -150,7 +150,7 @@ def delete_many(col, searchquery={}):
   return result.deleted_count
 
 ##########
-# Utils
+# Sort
 ##########
 
 def sort_asc(col, target_key):
@@ -160,6 +160,10 @@ def sort_asc(col, target_key):
 def sort_desc(col, target_key):
   result = col.find().sort(target_key, -1)
   return result
+
+##########
+# Utils
+##########
 
 def count_documents(col, searchquery={}, projectionquery={}):
   result = col.count_documents(searchquery, projectionquery)
@@ -184,9 +188,9 @@ def modify_key_to_id(entry, target_key):
 if __name__ == "__main__":
   mc = get_mc()
   db_name = "mitkardb"
-  mitkardb = get_db(mc, db_name)
+  mitkardb = create_db(mc, db_name)
   col_name = "creditcol"
-  creditcol = get_db(mitkardb, col_name)
+  creditcol = create_col(mitkardb, col_name)
 
   creditlist = get_sample_list()
   insert_many(creditcol, creditlist)
